@@ -1,0 +1,22 @@
+<?php 
+$title =$this->translate('Show Blog');
+$this->headTitle($title);
+?>
+<h1><?php echo $this->escapeHtml($title); ?></h1>
+<p>
+'<?php echo $this->escapeHtml($blog->getTitle()); ?>'  
+'<?php echo $this->escapeHtml($blog->getContents()); ?>'
+</p>
+
+<div id="sticky-notes">
+<input type="hidden" id="blogid" value="<?php echo $blog->getId();?>">
+<?php foreach($comments as $comment):?>
+    <div class="sticky-note">
+        <textarea class="customtextarea" id="stickynote-<?php echo $comment->getId() ?>"><?php echo $comment->getText() ?></textarea>
+        <a href="#" id="remove-<?php echo $comment->getId(); ?>"class="delete-sticky">X</a>
+    </div>
+    <?php endforeach; ?>
+    <div id="create">+</div>
+
+</div>
+<div class="clear-both"></div>

@@ -1,0 +1,89 @@
+<?php echo $this->doctype(); ?>
+
+<html  <?php if ($mylocale=='ar_SY') {?> lang="ar" dir="RTL" <?php } else {?> lang="en" <?php }?>>
+    <head>
+        <meta charset="utf-8">
+        <?php echo $this->headTitle('ZF2 '. $this->translate('My Blog'))->setSeparator(' - ')->setAutoEscape(false) ?>
+
+        <?php echo $this->headMeta()->appendName('viewport', 'width=device-width, initial-scale=1.0') ?>
+
+        <!-- Le styles -->
+        <?php 
+        echo $this->headLink(array('rel' => 'shortcut icon', 'type' => 'image/vnd.microsoft.icon', 'href' => $this->basePath() . '/img/favicon.ico'))
+                        ->prependStylesheet($this->basePath() . '/css/StickyNotes.css')
+                        ->prependStylesheet($this->basePath() . '/css/bootstrap-responsive.min.css')
+                        ->prependStylesheet($this->basePath() . '/css/style.css')
+                        ->prependStylesheet($this->basePath() . '/css/bootstrap.min.css') ?>
+
+        <!-- Scripts -->
+        <?php echo $this->headScript()->prependFile($this->basePath() . '/js/html5.js', 'text/javascript', array('conditional' => 'lt IE 9',))
+                                      ->prependFile($this->basePath() . '/js/bootstrap.min.js')
+                                      ->prependFile($this->basePath() . '/js/jquery.min.js')
+                                      ->appendFile($this->basePath() . '/js/custom.js')
+        ?>
+
+    </head>
+    <body>
+        <div class="navbar navbar-inverse navbar-fixed-top">
+            <div class="navbar-inner">
+                <div class="container">
+                
+                  <div>
+                  <li class="dropdown" style="<?php if ($mylocale=='ar_SY') {?> float:left;<?php } else {?> float:right;<?php }?>list-style-type:none;margin:4px">
+                   <a href="<?php echo $this->url('home');?>" class="dropdown-toggle" data-toggle="dropdown"> 
+                   <?php if ($mylocale=='ar_SY'){ echo "عربي";  }?>
+                   <?php if ($mylocale=='en_US'){ echo "English";  }?>
+                   <?php if ($mylocale=='de_DE'){ echo "Deutsch";  }?>
+                   <img  src="<?php echo $this->basePath()?>/img/language-skills-icon.png"> </a>
+                        <ul class="dropdown-menu">
+                          <li <?php if ($mylocale=='ar_SY'){?> class="active" <?php }?> ><a href="<?php echo $this->url('blog', array('controller' => 'blog','action' => 'changelang', 'id' => 1));?>">عربي</a></li>
+                          <li <?php if ($mylocale=='en_US'){?> class="active" <?php }?>><a href="<?php echo $this->url('blog', array('controller' => 'blog','action' => 'changelang','id'=>2));?>">English</a></li>
+                          <li <?php if ($mylocale=='de_DE'){?> class="active" <?php }?>><a href="<?php echo $this->url('blog', array('controller' => 'blog','action' => 'changelang','id'=>3));?>">Deutsch</a></li>
+                        </ul>
+                 </li>
+                 </div>
+                 
+                    <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </a>
+<a class="brand" style="<?php if ($mylocale=='ar_SY') {?> float:right;<?php }?>"
+href="<?php echo $this->url('home') ?>"><?php echo $this->translate('My Blog') ?></a>
+<?php 
+echo $this->navigation('navigation')
+->menu()
+->setMinDepth(0)
+->setMaxDepth(0)
+->setUlClass('nav');
+?>                    
+                </div>
+            </div>
+        </div>
+                    
+                    
+                </div>
+            </div>
+        </div>
+        
+        <div class="container">
+<?php
+echo $this->navigation('navigation')
+->breadcrumbs()
+->setMinDepth(0)
+->setPartial(array('partial/breadcrumb.phtml', 'Blog'));
+?>
+<?php echo $this->content; ?>
+            <hr>
+            <footer>
+                <p>&copy;   <?php echo date('Y') ?>  <?php echo $this->translate('By Osama Abufara')."." ?> <?php echo $this->translate('All rights reserved.') ?></p>
+            </footer>
+</div> <!-- /container -->
+        <?php echo $this->inlineScript() ?>
+<?php if ($mylocale=='ar_SY') {?>  
+<script>
+$(".nav").eq(0).css('float', 'right');
+</script>        
+<?php }?>
+</body>
+</html>
